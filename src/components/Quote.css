@@ -1,0 +1,173 @@
+.quote {
+  padding-left: var(--rail-x);
+}
+
+.quote_form {
+  background: var(--bg-surface);
+  border: 1px solid var(--hairline);
+  border-radius: var(--radius-lg);
+  padding: var(--space-5);
+}
+
+.quote_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-5);
+}
+
+.quote_label {
+  font-family: var(--font-mono);
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--space-3);
+}
+
+.quote_checks {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  margin-bottom: var(--space-4);
+}
+
+.check {
+  display: flex;
+  align-items: center;
+  gap: 0.8em;
+  cursor: pointer;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  user-select: none;
+}
+
+.check input {
+  position: absolute;
+  opacity: 0;
+  width: 1px;
+  height: 1px;
+}
+
+.check_mark {
+  width: 20px;
+  height: 20px;
+  flex: none;
+  border-radius: 6px;
+  border: 1.5px solid var(--line-hover);
+  display: grid;
+  place-items: center;
+  scale: 1;
+  transition: scale 0.2s var(--ease-out), border-color 0.2s var(--ease-out), background-color 0.2s var(--ease-out);
+}
+
+.check_mark::after {
+  content: "";
+  width: 10px;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--text-on-accent);
+  scale: 0;
+  transition: scale 0.18s var(--ease-out);
+}
+
+.check input:checked + .check_mark {
+  background: var(--signal-blue);
+  border-color: var(--signal-blue);
+}
+
+.check input:checked + .check_mark::after {
+  scale: 1;
+}
+
+.check input:focus-visible + .check_mark {
+  outline: 2px solid var(--signal-blue);
+  outline-offset: 2px;
+}
+
+.check:hover .check_mark {
+  border-color: var(--signal-blue);
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5em;
+  margin-bottom: var(--space-3);
+}
+
+.field_label {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--text-tertiary);
+}
+
+.field input,
+.field select,
+.field textarea {
+  background: var(--bg-surface-2);
+  border: 1.5px solid var(--hairline);
+  border-radius: var(--radius-sm);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  font-size: 0.95rem;
+  padding: 0.85em 1em;
+  transition: border-color 0.25s var(--ease-out), background-color 0.25s var(--ease-out);
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: var(--font-sans);
+}
+
+.field input::placeholder,
+.field textarea::placeholder {
+  color: var(--text-tertiary);
+}
+
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  outline: none;
+  border-color: var(--signal-blue);
+  background: var(--bg-surface-3);
+}
+
+.field select {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2398A3B8' stroke-width='1.6' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 1em center;
+}
+
+.field select option {
+  background: var(--bg-surface-2);
+  color: var(--text-primary);
+}
+
+.quote_submit {
+  margin-top: var(--space-2);
+  width: 100%;
+  justify-content: center;
+  border: none;
+  cursor: pointer;
+}
+
+@media (max-width: 780px) {
+  .quote {
+    padding-left: 46px;
+  }
+
+  .quote_grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-3);
+  }
+
+  .quote_form {
+    padding: var(--space-4);
+  }
+}
+
+@media (max-width: 640px) {
+  .quote {
+    padding-left: 0;
+  }
+}

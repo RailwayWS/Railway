@@ -1,0 +1,122 @@
+/* Balance the padding on BOTH sides to find the true visual center */
+.process {
+    padding-left: max(var(--rail-x, 120px), 120px);
+    padding-right: max(var(--rail-x, 120px), 120px);
+    display: flex;
+    justify-content: center; /* Centers the inner container */
+}
+
+/* Constrain the inner container so the text doesn't stretch too wide */
+.process .container {
+    width: 100%;
+    max-width: 640px;
+}
+
+.process_list {
+    list-style: none;
+    margin: 3rem 0 0 0; /* Slightly more top margin for breathing room */
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Fills the centered container perfectly */
+}
+
+/* The Row: Clean, borderless sides, with a subtle separator.
+  We add a transition here so everything inside animates smoothly on hover.
+*/
+.process_station {
+    display: grid;
+    grid-template-columns: 60px 1fr;
+    gap: var(--space-4, 2rem);
+    padding: 2.5rem 0;
+    /* Swapped hardcoded white for your dynamic hairline variable */
+    border-bottom: 1px solid var(--hairline);
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    cursor: default;
+}
+
+/* Remove the top border to avoid doubling up, except on the first item */
+.process_station:first-child {
+    /* Swapped hardcoded white for your dynamic hairline variable */
+    border-top: 1px solid var(--hairline);
+}
+
+/* The Hover Effect: The row slides right slightly, giving a fluid "selected" feel 
+*/
+.process_station:hover {
+    transform: translateX(8px);
+}
+
+/* The Numbers: Styled like a technical readout. Dim by default, 
+  lighting up neon blue when the row is hovered. 
+*/
+.process_index {
+    font-family: var(--font-mono);
+    font-size: 1.75rem;
+    font-weight: 300;
+    /* 30% opacity of your theme's signal blue */
+    color: color-mix(in srgb, var(--signal-blue) 30%, transparent);
+    line-height: 1;
+    transition:
+        color 0.4s ease,
+        text-shadow 0.4s ease;
+}
+
+.process_station:hover .process_index {
+    /* Full brightness signal blue on hover */
+    color: var(--signal-blue);
+    /* Glow effect using 50% opacity of your signal blue */
+    text-shadow: 0 0 12px
+        color-mix(in srgb, var(--signal-blue) 50%, transparent);
+}
+
+.process_body {
+    transition: opacity 0.4s ease;
+    opacity: 0.8;
+}
+
+.process_station:hover .process_body {
+    opacity: 1;
+}
+
+.process_body h3 {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    margin: 0 0 0.5rem;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.process_body p {
+    margin: 0;
+    color: var(--text-secondary);
+    line-height: 1.6;
+    max-width: 50ch;
+    font-size: 1rem;
+}
+
+/* Mobile Adjustments */
+@media (max-width: 640px) {
+    .process {
+        /* Reset BOTH sides so the container spans the full screen width */
+        padding-left: 0;
+        padding-right: 0;
+    }
+
+    .process_station {
+        grid-template-columns: 1fr;
+        gap: 0.5rem;
+        padding: 2rem 0;
+    }
+
+    /* Kill the hover slide on mobile, it gets clunky with touch */
+    .process_station:hover {
+        transform: none;
+    }
+
+    .process_index {
+        font-size: 1.25rem;
+        margin-bottom: 0.5rem;
+        display: inline-block;
+    }
+}

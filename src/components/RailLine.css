@@ -1,0 +1,72 @@
+.rail-line {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 10px;
+    width: 90px;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.rail-line_svg {
+    width: 100%;
+    height: 100%;
+    display: block;
+    overflow: visible;
+}
+
+.rail-line_track {
+    fill: none;
+    /* 15% opacity of your theme's signal blue */
+    stroke: color-mix(in srgb, var(--signal-blue) 15%, transparent);
+    stroke-width: 2;
+    stroke-linejoin: miter;
+    stroke-linecap: square;
+}
+
+.rail-line_progress {
+    fill: none;
+    stroke-width: 4;
+    stroke-linejoin: miter;
+    stroke-linecap: square;
+    /* Glow effect using your theme's signal blue */
+    filter: drop-shadow(
+            0 0 6px color-mix(in srgb, var(--signal-blue) 60%, transparent)
+        )
+        drop-shadow(
+            0 0 12px color-mix(in srgb, var(--signal-blue) 40%, transparent)
+        );
+}
+
+.rail-line_head {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: radial-gradient(
+        circle,
+        color-mix(in srgb, var(--signal-blue) 40%, transparent) 0%,
+        transparent 70%
+    );
+}
+
+.rail-line_head-core {
+    width: 6px;
+    height: 6px;
+    background-color: #ffffff; /* Keeping the core pure white makes it pop nicely */
+    border-radius: 50%;
+    /* Outer and inner halo using your theme's signal blue */
+    box-shadow:
+        0 0 8px 2px color-mix(in srgb, var(--signal-blue) 90%, transparent),
+        0 0 16px 4px color-mix(in srgb, var(--signal-blue) 60%, transparent);
+}
+
+@media (max-width: 768px) {
+    .rail-line {
+        opacity: 0.3;
+    }
+}

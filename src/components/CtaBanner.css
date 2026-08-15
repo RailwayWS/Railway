@@ -1,0 +1,57 @@
+.cta-banner {
+    padding-block: var(--space-6);
+    /* Added horizontal padding so the card never touches the edges of the screen */
+    padding-inline: var(--space-4);
+    display: flex;
+    justify-content: center; /* Ensures the card stays centered */
+}
+
+.cta-banner_inner {
+    text-align: center;
+    padding: var(--space-6) var(--space-4);
+    background: var(--bg-surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-lg);
+    width: 100%; /* Ensures it fills the available space up to the max-width */
+    max-width: calc(var(--content-width) - var(--rail-x));
+}
+
+.cta-banner_inner .eyebrow {
+    justify-content: center;
+}
+
+.cta-banner_title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(1.9rem, 4.4vw, 2.9rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-4);
+}
+
+.cta-banner_buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+}
+
+@media (max-width: 640px) {
+    .cta-banner {
+        /* Slightly smaller edge gap on mobile, but still enough to show the rounded corners */
+        padding-inline: var(--space-3);
+    }
+
+    .cta-banner_inner {
+        padding: var(--space-5) var(--space-3);
+    }
+
+    /* Stack the buttons full-width on mobile to match your Hero section */
+    .cta-banner_buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .cta-banner_buttons .btn {
+        justify-content: center;
+    }
+}

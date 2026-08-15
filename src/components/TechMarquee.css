@@ -1,0 +1,65 @@
+.marquee {
+    position: relative;
+    padding-block: var(--space-4);
+    border-top: 1px solid var(--hairline);
+    border-bottom: 1px solid var(--hairline);
+    overflow: hidden;
+}
+
+.marquee_track {
+    display: flex;
+    width: max-content;
+    /* Removed 'gap' — we handle spacing on the item level now for perfect loop math */
+    animation: marquee-scroll 40s linear infinite; /* Slowed down slightly since the track is longer */
+}
+
+.marquee_item {
+    font-family: var(--font-mono);
+    font-size: 1.4rem;
+    font-weight: 700;
+    letter-spacing: 0.02em;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--line-hover);
+    white-space: nowrap;
+    padding-right: 4.5rem; /* Replaces the flex gap to ensure every item accounts for space */
+    transition:
+        color 0.3s var(--ease-out),
+        -webkit-text-stroke 0.3s var(--ease-out);
+}
+
+.marquee_item:hover {
+    color: var(--signal-blue);
+    -webkit-text-stroke: 0px;
+}
+
+@keyframes marquee-scroll {
+    to {
+        /* Because we have 4 stacks, shifting by -50% perfectly loops back to the start of stack 3 */
+        translate: -50% 0;
+    }
+}
+
+.marquee_edge {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 90px;
+    z-index: 2;
+    pointer-events: none;
+}
+
+.marquee_edge-left {
+    left: 0;
+    background: linear-gradient(to right, var(--bg-void), transparent);
+}
+
+.marquee_edge-right {
+    right: 0;
+    background: linear-gradient(to left, var(--bg-void), transparent);
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .marquee_track {
+        animation: none;
+    }
+}

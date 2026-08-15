@@ -1,0 +1,91 @@
+/* Balance the padding on BOTH sides to find the true visual center */
+.team {
+    padding-left: max(var(--rail-x, 120px), 120px);
+    padding-right: max(var(--rail-x, 120px), 120px);
+    display: flex;
+    justify-content: center;
+}
+
+/* Constrain the inner container */
+.team .container {
+    width: 100%;
+    max-width: 800px;
+}
+
+/* 2x2 Grid for desktop */
+.team_grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--space-4, 2rem);
+    margin-top: 2rem;
+}
+
+.team_card {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: var(--radius-lg, 12px);
+    padding: 2.5rem 1.5rem;
+    text-align: center;
+    transition:
+        transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+        border-color 0.35s ease;
+}
+
+.team_card:hover {
+    transform: translateY(-6px);
+    border-color: #00f2fe;
+    box-shadow: 0 10px 30px -10px rgba(0, 242, 254, 0.1);
+}
+
+.team_avatar {
+    width: 72px;
+    height: 72px;
+    margin: 0 auto 1.5rem;
+    border-radius: 50%;
+    display: grid;
+    place-items: center;
+    font-family: var(--font-mono);
+    /* Reverted to your original font weight and size */
+    font-weight: 700;
+    font-size: 1.1rem;
+
+    /* Reverted to the original deep blue/violet variables */
+    color: var(--text-on-accent);
+    background: linear-gradient(135deg, var(--signal-blue), var(--dusk-violet));
+
+    /* Kept a subtle shadow to give the circles some physical depth */
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+
+.team_card h3 {
+    font-family: var(--font-mono);
+    font-size: 1.25rem;
+    margin: 0 0 0.5em;
+    color: var(--text-primary);
+    letter-spacing: 0.02em;
+}
+
+.team_card p {
+    margin: 0;
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+}
+
+/* Mobile Adjustments */
+@media (max-width: 780px) {
+    .team {
+        padding-left: 0;
+        padding-right: 0;
+    }
+}
+
+@media (max-width: 640px) {
+    .team_grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .team_card:hover {
+        transform: none;
+    }
+}

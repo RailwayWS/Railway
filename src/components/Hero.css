@@ -1,0 +1,284 @@
+.hero {
+    padding-top: clamp(7rem, 14vw, 10rem);
+    padding-bottom: var(--space-6);
+    overflow: clip;
+}
+
+.hero_grid {
+    padding-left: var(--rail-x);
+    display: grid;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: var(--space-6);
+    align-items: center;
+}
+
+.hero_title {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(2.1rem, 5vw, 3.4rem);
+    line-height: 1.15;
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-3);
+}
+
+.hero_bracket {
+    color: var(--signal-blue);
+}
+
+.hero_bracket-close {
+    color: var(--dusk-violet);
+}
+
+.hero_cursor {
+    display: inline-block;
+    width: 0.55em;
+    height: 1em;
+    margin-left: 0.1em;
+    background: var(--signal-blue);
+    translate: 0 0.18em;
+    animation: cursor-blink 1s step-end infinite;
+}
+
+@keyframes cursor-blink {
+    50% {
+        opacity: 0;
+    }
+}
+
+.hero_description {
+    font-size: 1.08rem;
+    line-height: 1.7;
+    color: var(--text-secondary);
+    max-width: 52ch;
+    margin: 0 0 var(--space-4);
+}
+
+.hero_buttons {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-3);
+    margin-bottom: var(--space-5);
+}
+
+.btn {
+    font-family: var(--font-mono);
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 0.9em 1.6em;
+    border-radius: var(--radius-sm);
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5em;
+    scale: 1;
+    rotate: 0deg;
+    transition:
+        scale 0.3s var(--ease-out),
+        rotate 0.3s var(--ease-out),
+        filter 0.3s var(--ease-out),
+        background-color 0.3s var(--ease-out),
+        border-color 0.3s var(--ease-out);
+}
+
+.btn-primary {
+    background: var(--signal-blue);
+    color: var(--text-on-accent);
+}
+
+.btn-primary:hover {
+    scale: 1.04;
+    rotate: -1deg;
+    /* Using filter instead of a hardcoded hex ensures the hover works perfectly in both themes */
+    filter: brightness(1.15);
+}
+
+.btn-secondary {
+    border: 1.5px solid var(--line-hover);
+    color: var(--text-primary);
+    background: transparent;
+}
+
+.btn-secondary:hover {
+    scale: 1.04;
+    rotate: 1deg;
+    border-color: var(--dusk-violet);
+    color: var(--dusk-violet);
+}
+
+.hero_tags {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-2) var(--space-3);
+}
+
+.hero_tags li {
+    font-size: 0.8rem;
+    color: var(--text-tertiary);
+    padding-left: 1.1em;
+    position: relative;
+}
+
+.hero_tags li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.5em;
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--signal-blue);
+}
+
+/* --- decorative code panel --- */
+.hero_panel {
+    background: var(--bg-surface);
+    border: 1px solid var(--hairline);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    /* Softened the shadow slightly so it doesn't look overly harsh on the white background */
+    box-shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.4);
+}
+
+.hero_panel-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 0.8em 1em;
+    background: var(--bg-surface-2);
+    border-bottom: 1px solid var(--hairline);
+}
+
+.dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 50%;
+}
+.dot-a {
+    background: #ff5f56; /* Kept standard Mac red */
+}
+.dot-b {
+    background: var(--signal-blue);
+}
+.dot-c {
+    background: var(--dusk-violet);
+}
+
+.hero_panel-title {
+    margin-left: auto;
+    font-family: var(--font-mono);
+    font-size: 0.72rem;
+    color: var(--text-tertiary);
+}
+
+.hero_panel-body {
+    padding: 1.4em 1.3em;
+    font-family: var(--font-mono);
+    font-size: 0.83rem;
+    line-height: 1.95;
+}
+
+.hero_panel-body p {
+    margin: 0;
+    white-space: pre;
+}
+
+.indent-1 {
+    padding-left: 1.4em;
+}
+.indent-2 {
+    padding-left: 2.8em;
+}
+.indent-3 {
+    padding-left: 4.2em;
+}
+
+/* 
+  Code syntax colors:
+  We mix the syntax colors with --text-primary. 
+  In Dark Mode, --text-primary is white, keeping the colors bright and pastel.
+  In Light Mode, --text-primary is dark blue/black, darkening the syntax colors so they remain legible.
+*/
+.tok-key {
+    color: var(--dusk-violet);
+}
+.tok-fn {
+    color: var(--signal-blue);
+}
+.tok-tag {
+    color: var(--signal-blue);
+}
+.tok-attr {
+    color: color-mix(in srgb, #f59e0b 70%, var(--text-primary)); /* Orange */
+}
+.tok-str {
+    color: color-mix(in srgb, #10b981 70%, var(--text-primary)); /* Green */
+}
+.tok-punc {
+    color: var(--text-tertiary);
+}
+
+@media (max-width: 940px) {
+    .hero_grid {
+        grid-template-columns: 1fr;
+        gap: var(--space-5);
+    }
+
+    /* Center all the content when it drops to a single column */
+    .hero_content {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+    }
+
+    /* Ensure the paragraph doesn't stretch weirdly and stays centered */
+    .hero_description {
+        margin-inline: auto;
+    }
+
+    .hero_buttons {
+        justify-content: center;
+        width: 100%;
+    }
+
+    .hero_tags {
+        justify-content: center;
+    }
+
+    .hero_panel {
+        width: 100%;
+        text-align: left; /* Keep the code inside the panel left-aligned! */
+    }
+
+    .hero_panel-body p {
+        white-space: normal;
+    }
+}
+
+@media (max-width: 640px) {
+    .hero_grid {
+        padding-left: 35px;
+        gap: var(--space-4);
+    }
+
+    .hero_panel-body {
+        font-size: 0.76rem;
+    }
+
+    /* Force buttons to sit side-by-side on mobile */
+    .hero_buttons {
+        flex-direction: row;
+        flex-wrap: nowrap; /* Prevents them from wrapping to the next line */
+        gap: 0.5rem; /* Slightly tighter gap to ensure they fit */
+    }
+
+    .btn {
+        flex: 1; /* Makes both buttons exactly the same width */
+        justify-content: center;
+        padding: 0.9em 0.5em; /* Reduces side padding slightly so they fit on small screens */
+        font-size: 0.85rem;
+        white-space: nowrap; /* Prevents text from breaking onto two lines */
+    }
+}

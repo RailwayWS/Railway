@@ -1,0 +1,232 @@
+/* ===================================================================
+   RAILWAY WEB SOLUTIONS — DESIGN TOKENS
+   Palette concept: an evening rail yard. Near-black charcoal-blue base,
+   a cool signal-blue for "go" moments, a dusk violet for secondary
+   accents. Two-note, cool-toned. Light theme swaps surfaces/text only —
+   the accent colors stay put so the brand reads the same in either mode.
+   =================================================================== */
+
+:root {
+    color-scheme: dark;
+    interpolate-size: allow-keywords;
+
+    /* --- surfaces (dark, default) --- */
+    --bg-void: #0a0d12;
+    --bg-surface: #12161e;
+    --bg-surface-2: #191e28;
+    --bg-surface-3: #212736;
+    --line-rest: #262c39;
+    --line-hover: #34405a;
+    --hairline: rgba(244, 246, 250, 0.08);
+    --nav-bg: rgba(18, 22, 30, 0.72);
+
+    /* --- accents (same in both themes) --- */
+    --signal-blue: #4fc3ff;
+    --signal-blue-dim: #2f7fb0;
+    --signal-blue-ink: #0f7fb3;
+    --dusk-violet: #a78bfa;
+    --dusk-violet-dim: #6d5aad;
+    --dusk-violet-ink: #6c4fd6;
+
+    /* --- text (dark, default) --- */
+    --text-primary: #f4f6fa;
+    --text-secondary: #98a3b8;
+    --text-tertiary: #5b6478;
+    --text-on-accent: #05070a;
+
+    /* --- type --- */
+    --font-mono: "Space Mono", "SFMono-Regular", Consolas, monospace;
+    --font-sans: "Manrope", "Segoe UI", sans-serif;
+
+    /* --- scale --- */
+    --space-1: 0.4rem;
+    --space-2: 0.8rem;
+    --space-3: 1.6rem;
+    --space-4: 2.4rem;
+    --space-5: 4rem;
+    --space-6: 6.4rem;
+    --space-7: 9.6rem;
+
+    --radius-sm: 6px;
+    --radius-md: 12px;
+    --radius-lg: 20px;
+    --radius-pill: 999px;
+
+    --content-width: 1180px;
+    --rail-x: clamp(46px, 8vw, 84px);
+
+    --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+:root[data-theme="light"] {
+    color-scheme: light;
+
+    /* --- surfaces (crisp, cool daytime rail yard) --- */
+    --bg-void: #f8fafc;
+    --bg-surface: #ffffff;
+    --bg-surface-2: #f1f5f9;
+    --bg-surface-3: #e2e8f0;
+    --line-rest: #cbd5e1;
+    --line-hover: #94a3b8;
+    --hairline: rgba(15, 23, 42, 0.08);
+    --nav-bg: rgba(
+        255,
+        255,
+        255,
+        0.85
+    ); /* Slightly more opaque for better overlay legibility */
+
+    /* --- text (darkened for sharp readability) --- */
+    --text-primary: #0f172a;
+    --text-secondary: #334155;
+    --text-tertiary: #64748b; /* Darkened to pass WCAG contrast rules */
+
+    /* When the accents become darker in light mode, text *on top* of them needs to be white */
+    --text-on-accent: #ffffff;
+
+    /* --- accents (luminance flipped for contrast) --- 
+     We keep the exact same brand hues, but map the primary 
+     accents to the deeper, punchier "ink" versions so they 
+     pop beautifully against the white surfaces. */
+    --signal-blue: #0f7fb3;
+    --signal-blue-dim: #0c6a96;
+    --signal-blue-ink: #074766;
+
+    --dusk-violet: #6c4fd6;
+    --dusk-violet-dim: #5a40b8;
+    --dusk-violet-ink: #412a8a;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background: var(--bg-void);
+    color: var(--text-primary);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+    transition:
+        background-color 0.4s var(--ease-out),
+        color 0.4s var(--ease-out);
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+button {
+    font-family: inherit;
+}
+
+::selection {
+    background: var(--signal-blue);
+    color: var(--text-on-accent);
+}
+
+.visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+.app-shell {
+    position: relative;
+}
+
+@media (max-width: 860px) {
+    .app-shell {
+        padding-bottom: 84px; /* clearance for the fixed mobile tab bar */
+    }
+}
+
+.container {
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--space-4);
+    position: relative;
+    z-index: 1;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: var(--space-2);
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    letter-spacing: 0.06em;
+    color: var(--signal-blue);
+    margin: 0 0 var(--space-2);
+}
+
+.eyebrow::before {
+    content: "//";
+    color: var(--text-tertiary);
+}
+
+.section-heading {
+    font-family: var(--font-mono);
+    font-weight: 700;
+    font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+    letter-spacing: -0.01em;
+    margin: 0 0 var(--space-3);
+    color: var(--text-primary);
+}
+
+.section-lede {
+    font-size: 1.05rem;
+    line-height: 1.65;
+    color: var(--text-secondary);
+    max-width: 46ch;
+    margin: 0 0 var(--space-5);
+}
+
+section {
+    position: relative;
+    padding-block: var(--space-7);
+}
+
+/* Respect reduced motion everywhere */
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        animation-duration: 0.001ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.001ms !important;
+        scroll-behavior: auto !important;
+    }
+}
+
+/* -------------------------------------------------------------
+   Scroll reveal targets. These start visible in the raw markup
+   (no permanently-hidden CSS state — if JS never runs, nothing
+   is ever lost) and are animated in by GSAP/ScrollTrigger, see
+   src/scrollAnimations.js. This is what actually animates
+   reliably in Firefox, unlike CSS animation-timeline.
+   ------------------------------------------------------------- */
+.reveal,
+.reveal-scale {
+    will-change: transform, opacity;
+}
